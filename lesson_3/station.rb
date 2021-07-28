@@ -1,6 +1,6 @@
 class Station
 
-  attr_reader :trains
+  attr_reader :trains, :name
 
   def initialize(name)
     @name = name
@@ -16,7 +16,7 @@ class Station
   end
 
   def train_list(type) # passenger, freight
-    trains.filter { |train| train.type = type }
+    trains.filter { |train| train.type == type }
   end
 
 end

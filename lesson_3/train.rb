@@ -18,11 +18,11 @@ class Train
   end
 
   def hook_railcar
-    number_of_railcars += 1 if @speed == 0
+    @number_of_railcars += 1 if @speed == 0
   end
 
   def unhook_railcar
-    number_of_railcars -= 1 if (@speed == 0) && (number_of_railcars > 1) 
+    @number_of_railcars -= 1 if (@speed == 0) && (@number_of_railcars > 1) 
   end
 
   def get_route(route)
@@ -32,7 +32,7 @@ class Train
   end
 
   def forward
-    if position_on_route < (@route.stations.size - 1)
+    if next_station
       current_station.train_departure(self)
       next_station.train_arrival(self)
       @position_on_route += 1
@@ -40,7 +40,7 @@ class Train
   end
 
   def backward
-    if position_on_route > 1
+    if previous_station
       current_station.train_departure(self)
       previous_station.train_arrival(self)
       @position_on_route -= 1
@@ -48,15 +48,15 @@ class Train
   end
 
   def current_station
-    @route.stations[position_on_route]
+    @route.stations[@position_on_route]
   end
 
   def previous_station
-    @route.stations[position_on_route - 1] if position_on_route > 1
+    @route.stations[@position_on_route - 1] if @position_on_route > 0
   end
 
   def next_station
-    @route.stations[position_on_route - 1] position_on_route < (@route.stations.size - 1)
+    @route.stations[@position_on_route + 1] if @position_on_route < (@route.stations.size - 1)
   end
 
 end
