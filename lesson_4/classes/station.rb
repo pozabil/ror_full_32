@@ -1,5 +1,4 @@
 class Station
-
   attr_reader :trains, :name
 
   def initialize(name)
@@ -22,5 +21,4 @@ class Station
   def to_s
     "station: #{name}"
   end
-
 end
