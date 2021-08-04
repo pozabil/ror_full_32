@@ -11,10 +11,6 @@ class Train
     @@trains[number]
   end
 
-  def self.t
-    @@trains
-  end
-
   attr_reader :number, :speed, :railcars
 
   def initialize(number)
