@@ -2,19 +2,16 @@ module InstanceCounter
   def self.included(base)
     base.extend ClassMethods
     base.prepend InstanceMethods
-    base.instance_variable_set(:@instances, 0)
   end
 
   module ClassMethods
-    attr_reader :instances
+    def instances
+      @instances ||= 0
+    end
 
     private
 
     attr_writer :instances
-
-    def inherited(subclass)
-      subclass.instance_variable_set(:@instances, 0)
-    end
   end
 
   # Чтобы автоматически вызывался из конструктора
@@ -28,6 +25,7 @@ module InstanceCounter
     private
 
     def register_instance
+      self.class.instances
       self.class.send(:instances=, (self.class.instances + 1))
     end
   end
