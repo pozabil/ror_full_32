@@ -25,13 +25,6 @@ class Train
     @@trains[number] = self
   end
 
-  def valid?
-    validate!
-    true
-  rescue RuntimeError
-    false
-  end
-
   def accelerate(value)
     @speed += value
   end
